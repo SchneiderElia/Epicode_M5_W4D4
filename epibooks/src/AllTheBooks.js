@@ -1,52 +1,140 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import dati from './books/history.json'
-import { useState } from 'react'
+import { useState, useRef} from 'react'
 import SearcBar from './SearchBar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import Form from 'react-bootstrap/Form'
+import CommentArea from './CommentArea'
+import Button from 'react-bootstrap/Button';
 
 
+/* /* function CardBooks(props) {
+  const [color, setColor] = useState(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const offcanvasRef = useRef(null);
+  const offcanvasBodyRef = useRef(null); // Mantieni il ref al body
+
+  const handleClick = () => {
+      setColor(!color);
+      setShowOffcanvas(true);
+  };
+
+  const handleCloseOffcanvas = () => {
+      setShowOffcanvas(false);
+      setColor(false);
+  };
+
+
+  return (
+      <Card
+          className='p-0'
+          style={{ width: '240px', cursor: 'pointer', boxShadow: color ? '0 0 15px 3px green' : 'none' }}
+          onClick={handleClick}
+      >
+          <div className='image-container'>
+              <img src={props.img} alt={props.title} />
+          </div>
+          <Card.Body style={{ height: '120px' }}>
+              <p className='title'>{props.title}</p>
+          </Card.Body>
+          <div className='px-3'>
+              <p>€{props.price}</p>
+          </div>
+
+          <Offcanvas
+              ref={offcanvasRef}
+              show={showOffcanvas}
+              onHide={handleCloseOffcanvas} // Gestisce la chiusura tramite pulsante
+              backdrop={false}
+              placement="end"
+              style={{ width: '640px' }}
+          >
+              <Offcanvas.Header closeButton onHide={handleCloseOffcanvas}>
+                  <Offcanvas.Title>{props.title}</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body ref={offcanvasBodyRef}>
+                  <div>
+                      <img src={props.img} style={{ width: '200px' }} alt={props.title} />
+                  </div>
+                  <p>Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.</p>
+                  <Form>
+                      <Form.Label>Range</Form.Label>
+                      <Form.Range />
+
+                      <Form.Control className='mb-3' type="text" placeholder="Name" />
+                      <FloatingLabel controlId="floatingTextarea2" label="Comments">
+                          <Form.Control
+                              as="textarea"
+                              placeholder="Leave a comment here"
+                              style={{ height: '100px' }}
+                          />
+                      </FloatingLabel>
+                  </Form>
+              </Offcanvas.Body>
+          </Offcanvas>
+      </Card>
+  );
+}
+ */
 
 
 function CardBooks(props) {
+/*   {const [color, setColor] = useState(false);
 
-  const [color, setColor] = useState(false);
-  const [show, setShow] = useState(false);
+  const handleClick = () => {
+      setColor(!color);
+       
+  }*/
 
-  const handelClick = () => {
-    setColor(!color);
-    setShow(!show);
-
-  }
-
-  const handleClose = () => setShow(false);
+   const [show, setShow] = useState(false);
+   const [color, setColor] = useState(false);
+ 
+   const handleClose = () => {
+     setShow(false);
+     setColor(false);
+   };
+ 
+   const handleShow = () => {
+     setShow(true);
+     setColor(true);
+   };
 
   return (
-    <Card className='p-0' style={{ width: '240px', cursor: 'pointer', boxShadow: color ? '0 0 15px 3px green' : 'none' }} onClick={handelClick}>
-      {/* <Card.Img variant="top" src={props.img}/> */}
-      <div className='image-container'>
-        <img src={props.img} />
-      </div>
-      <Card.Body style={{ height: '120px' }}>
-        <p className='title'>{props.title}</p>
-      </Card.Body>
-      <div className='px-3'>
-        <p>€{props.price}</p>
-      </div>
-
-      <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true}>
+      <Card
+          className='p-0'
+          style={{ width: '240px', cursor: 'pointer',  }}
+          /* onClick={handleClick} */
+      >
+          <div className='image-container'>
+              <img src={props.img} alt={props.title} />
+          </div>
+          <Card.Body style={{ height: '120px' }}>
+              <p className='title'>{props.title}</p>
+          </Card.Body>
+          <div className='px-3'>
+              <p>€{props.price}</p>
+          </div>
+          <Button
+          onClick={ handleShow}
+          style={{ height: '480px', width: '240px', position: 'absolute', bottom: '0', backgroundColor: 'transparent', boxShadow: color ? '0 0 15px 3px green' : 'none' }}
+        >
+      </Button>
+      <Offcanvas show={show} onHide={handleClose} backdrop="static" placement="end">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Leave a Comment</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body >
-          
-          <div>
-            <img src={props.img} style={{ width: '200px' }} />
+        <Offcanvas.Body>
+          <div className='row'>
+            <div className='col-6'>
+             <img src={props.img} alt={props.title} style={ {width: '150px'}}/>
+            </div>
+            <div className='col-6'>
+                <p>{props.title}</p>
+                </div>
           </div>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          <div className='mt-5'>
           <form>
             <Form.Label>Range</Form.Label>
             <Form.Range />
@@ -60,11 +148,14 @@ function CardBooks(props) {
               />
             </FloatingLabel>
           </form>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
-    </Card>
+
+      </Card>
   );
 }
+
 
 function AllTheBooks() {
 
