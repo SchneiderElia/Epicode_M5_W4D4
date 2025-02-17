@@ -1,14 +1,15 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import dati from './books/history.json'
-import { useState, useRef} from 'react'
+import { useState, useRef } from 'react'
 import SearcBar from './SearchBar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form'
 import CommentArea from './CommentArea'
 import Button from 'react-bootstrap/Button';
-
+import CommentAreaNew from './ShowComment'
+import { Link } from 'react-router-dom';
 
 /* /* function CardBooks(props) {
   const [color, setColor] = useState(false);
@@ -81,107 +82,120 @@ import Button from 'react-bootstrap/Button';
 
 
 function CardBooks(props) {
-/*   {const [color, setColor] = useState(false);
+    /*   {const [color, setColor] = useState(false);
+    
+      const handleClick = () => {
+          setColor(!color);
+           
+      }*/
 
-  const handleClick = () => {
-      setColor(!color);
-       
-  }*/
+    const [show, setShow] = useState(false);
+    const [color, setColor] = useState(false);
 
-   const [show, setShow] = useState(false);
-   const [color, setColor] = useState(false);
- 
-   const handleClose = () => {
-     setShow(false);
-     setColor(false);
-   };
- 
-   const handleShow = () => {
-     setShow(true);
-     setColor(true);
-   };
+    const handleClose = () => {
+        setShow(false);
+        setColor(false);
+    };
 
-  return (
-      <Card
-          className='p-0'
-          style={{ width: '240px', cursor: 'pointer',  }}
-          /* onClick={handleClick} */
-      >
-          <div className='image-container'>
-              <img src={props.img} alt={props.title} />
-          </div>
-          <Card.Body style={{ height: '120px' }}>
-              <p className='title'>{props.title}</p>
-          </Card.Body>
-          <div className='px-3'>
-              <p>€{props.price}</p>
-          </div>
-          <Button
-          onClick={ handleShow}
-          style={{ height: '480px', width: '240px', position: 'absolute', bottom: '0', backgroundColor: 'transparent', boxShadow: color ? '0 0 15px 3px green' : 'none' }}
+    const handleShow = () => {
+        setShow(true);
+        setColor(true);
+    };
+
+    return (
+        <Card
+            className='p-0'
+            style={{ width: '240px', cursor: 'pointer', }}
+        /* onClick={handleClick} */
         >
-      </Button>
-      <Offcanvas show={show} onHide={handleClose} backdrop="static" placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Leave a Comment</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div className='row'>
-            <div className='col-6'>
-             <img src={props.img} alt={props.title} style={ {width: '150px'}}/>
+            <div className='image-container'>
+                <img src={props.img} alt={props.title} />
             </div>
-            <div className='col-6'>
-                <p>{props.title}</p>
-                </div>
-          </div>
-          <div className='mt-5'>
-          <form>
-            <Form.Label>Range</Form.Label>
-            <Form.Range />
+            <Card.Body style={{ height: '120px' }}>
+                <p className='title'>{props.title}</p>
+            </Card.Body>
+            <div className='px-3'>
+                <p>€{props.price}</p>
+            </div>
+            
+            <Button
+                onClick={handleShow}
+                style={{ height: '480px', width: '240px', position: 'absolute', bottom: '0', backgroundColor: 'transparent', boxShadow: color ? '0 0 15px 3px green' : 'none' }}
+            >
+            </Button>
+            <Offcanvas show={show} onHide={handleClose} backdrop="static" placement="end">
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Leave a Comment</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <div className='row'>
+                        <div className='col-6'>
+                            <img src={props.img} alt={props.title} style={{ width: '150px' }} />
+                        </div>
+                        <div className='col-6'>
+                            <p>{props.title}</p>
+                            <CommentArea /> {/* bottone per vedere l'are dei commenti aggiuntiva */}
+                            <Button>hello</Button>
 
-            <Form.Control className='mb-3' type="text" placeholder="Name" />
-            <FloatingLabel controlId="floatingTextarea2" label="Comments">
-              <Form.Control
-                as="textarea"
-                placeholder="Leave a comment here"
-                style={{ height: '100px' }}
-              />
-            </FloatingLabel>
-          </form>
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
+                           
+                            <Link to={`/books/:${props.asin}`}> 
+  <Button variant="secondary">Vai ai dettagli</Button> 
+</Link>
+                   
+                        </div>
+                    </div>
+                    <div className='mt-5'>
+                        <form>
+                            <Form.Label>Range</Form.Label>
+                            <Form.Range />
 
-      </Card>
-  );
+                            <Form.Control className='mb-3' type="text" placeholder="Name" />
+                                <Form.Control
+                                    as="textarea"
+                                    placeholder="Leave a comment here"
+                                    style={{ height: '100px' }}
+                                />
+                                <Button variant="primary" type="submit" style={{width:'370px', marginTop:'20px'}}>
+        Add Commnet
+      </Button>
+                            
+                        </form>
+                    </div>
+                    <CommentAreaNew />
+
+                </Offcanvas.Body>
+            </Offcanvas>
+
+        </Card>
+    );
 }
 
 
 function AllTheBooks() {
 
-  const [libriFiltrati, setLibriFiltrati] = useState(dati);
+    const [libriFiltrati, setLibriFiltrati] = useState(dati);
 
-  const handleSearch = (searchTerm) => {
-    const filtered = dati.filter(book =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setLibriFiltrati(filtered);
-  };
+    const handleSearch = (searchTerm) => {
+        const filtered = dati.filter(book =>
+            book.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setLibriFiltrati(filtered);
+    };
 
-  return (
-    <div className='row gap-4 justify-content-center'>
-      <SearcBar onSearch={handleSearch} />
-      {libriFiltrati.map(books => (
-        <CardBooks
-          key={books.asin}
-          img={books.img}
-          title={books.title}
-          price={books.price}
-        >
-        </CardBooks>
-      ))}
-    </div>
-  )
+    return (
+        <div className='row gap-4 justify-content-center'>
+            <SearcBar onSearch={handleSearch} />
+            {libriFiltrati.map(books => (
+                <CardBooks
+                    key={books.asin}
+                    img={books.img}
+                    title={books.title}
+                    price={books.price}
+                >
+                </CardBooks>
+            ))}
+        </div>
+    )
 }
 
 

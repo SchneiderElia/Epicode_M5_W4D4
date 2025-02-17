@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Footer from 'react-bootstrap/Navbar';
 
-function ColorSchemesExample() {
+function MyFooter() {
   return (
       <Footer bg="primary" data-bs-theme="dark">
         <Container>
@@ -11,4 +11,4 @@ function ColorSchemesExample() {
   );
 }
 
-export default ColorSchemesExample;
+export default MyFooter;

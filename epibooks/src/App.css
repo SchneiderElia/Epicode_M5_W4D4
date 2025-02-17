@@ -1,12 +1,9 @@
 .App {
   background-color: #282c34;
-  min-height: 100dvh;
+  min-height: 89dvh;
  
 }
 
-.App-content {
-  min-height: 89vh;
-}
 
 .footer {
   color: whitesmoke;

@@ -1,35 +1,34 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import MyNav from './MyNav'
-import MyFooter from './MyFooter'
-import Alert from './Alert'
-import CardBooks from './AllTheBooks'
-import AllTheBooks from './AllTheBooks'
-import SearcBar from './SearchBar'
+
+///////////////  NEW  redefine for rout  //////////////////////////////////////////////////////////////////////////////
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
+import BooksDetails from './pages/BooksDetails'
+import NotFound from './pages/NotFound.jsx'
+import AboutUs from './pages/AboutUs.jsx'
+
+import Mynav from './components/MyNav.jsx'
+import MyFooter from './components/MyFooter.jsx'
+
+///////////////  NEW  redefine for rout  //////////////////////////////////////////////////////////////////////////////
 
 
 function App() {
   return (
-    <main className='App'>
-
-      <MyNav />
-
-      <div className='App-content'>
-        <div className='container mt-5'>
-          <Alert />
-        </div>
-
-        <div className='container mt-5 mb-5'>
-          <AllTheBooks/>
-        </div>
-
-      </div>
-      <footer>
-        <MyFooter />
-      </footer>
-    </main>
-
+    <BrowserRouter>
+      <Mynav />
+      <main className='App'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/AboutUs' element={<AboutUs />} />
+          <Route path="/books/:asin" element={<BooksDetails />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </main>
+      <MyFooter />
+    </BrowserRouter>
   );
 }
-
 export default App;

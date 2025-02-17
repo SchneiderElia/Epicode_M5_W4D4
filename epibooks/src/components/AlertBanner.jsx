@@ -1,13 +1,15 @@
-import { useState } from 'react';
-import Alert from 'react-bootstrap/Alert';
+import { useState } from 'react'
+import Alert from 'react-bootstrap/Alert'
+import Container from 'react-bootstrap/Container'
 
 
-function AlertDismissibleExample() {
+function AlertBanner() {
     const [show, setShow] = useState(true);
 
     if (show) {
         return (
-            <Alert variant="primary" onClose={() => setShow(false)} dismissible>
+         
+            <Alert  variant="primary" onClose={() => setShow(false)} dismissible>
                 <Alert.Heading>Hello Welcome in Epibooks!</Alert.Heading>
                 <p>
                     Benvenuto nella nostra community di amanti della lettura!
@@ -17,9 +19,10 @@ function AlertDismissibleExample() {
                     Esplora le nostre sezioni e trova la tua prossima lettura preferita.
                 </p>
             </Alert>
+          
         );
     }
 
 }
 
-export default AlertDismissibleExample;
+export default AlertBanner;
