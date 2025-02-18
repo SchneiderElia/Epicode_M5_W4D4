@@ -2,11 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import dati from './books/history.json'
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
-function CommentArea() {
+function ViewCommentAreaPlus() {
   const [show, setShow] = useState(false);
 /*   const [color, setColor] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null); */
@@ -45,4 +42,4 @@ function CommentArea() {
   );
 }
 
-export default CommentArea;
+export default ViewCommentAreaPlus;

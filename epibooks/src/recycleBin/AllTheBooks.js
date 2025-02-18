@@ -1,12 +1,12 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import dati from './books/history.json'
-import { useState, useRef } from 'react'
+import dati from '../books/history.json'
+import { useState, useRef, } from 'react'
 import SearcBar from './SearchBar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form'
-import CommentArea from './CommentArea'
+import CommentArea from '../CommentArea'
 import Button from 'react-bootstrap/Button';
 import CommentAreaNew from './ShowComment'
 import { Link } from 'react-router-dom';
@@ -92,6 +92,8 @@ function CardBooks(props) {
     const [show, setShow] = useState(false);
     const [color, setColor] = useState(false);
 
+
+
     const handleClose = () => {
         setShow(false);
         setColor(false);
@@ -137,10 +139,11 @@ function CardBooks(props) {
                             <CommentArea /> {/* bottone per vedere l'are dei commenti aggiuntiva */}
                             <Button>hello</Button>
 
-                           
-                            <Link to={`/books/:${props.asin}`}> 
-  <Button variant="secondary">Vai ai dettagli</Button> 
+                            <Link to={`/books/${props.asin}`}>
+    <Button variant="secondary">Vai ai dettagli</Button>
 </Link>
+                           
+
                    
                         </div>
                     </div>
@@ -173,7 +176,7 @@ function CardBooks(props) {
 
 function AllTheBooks() {
 
-    const [libriFiltrati, setLibriFiltrati] = useState(dati);
+    const [libriFiltrati, setLibriFiltrati] = useState(InfoBooks);
 
     const handleSearch = (searchTerm) => {
         const filtered = dati.filter(book =>

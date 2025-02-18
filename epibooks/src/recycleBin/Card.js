@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import dati from './books/history.json'
+import dati from '../books/history.json'
 
 
 function BasicExample(props) {
